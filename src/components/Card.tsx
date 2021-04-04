@@ -13,7 +13,7 @@ interface Props {
 export default function SimpleCard(props: Props) {
   const useStyles = makeStyles({
     card: {
-      maxWidth: 150,
+      width: 200,
       float: 'left',
       marginLeft: 15,
       backgroundColor: 'antiquewhite'
@@ -37,7 +37,7 @@ export default function SimpleCard(props: Props) {
         <Typography className={classes.title} gutterBottom>
           {props.metric}
         </Typography>
-        <Typography className={classes.metric} variant="body2" component="p">
+        <Typography className={classes.metric} variant="h5" component="h5">
           {props.data}
         </Typography>
       </CardContent>

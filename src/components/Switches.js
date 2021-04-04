@@ -41,7 +41,7 @@ export default function Switches() {
 
   return (
     <div>
-      <h1>Select Metrics</h1>
+      <h1 style={{ marginLeft: 20 }}>Select Metrics</h1>
       <FormControl component="fieldset" style={{ width: '100%' }}>
         <FormGroup aria-label="position" row style={{
           display: 'flex',
