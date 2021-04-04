@@ -42,8 +42,11 @@ export default function Switches() {
   return (
     <div>
       <h1>Select Metrics</h1>
-      <FormControl component="fieldset">
-        <FormGroup aria-label="position" row>
+      <FormControl component="fieldset" style={{ width: '100%' }}>
+        <FormGroup aria-label="position" row style={{
+          display: 'flex',
+          justifyContent: 'space-between', width: '100%'
+        }}>
           <FormControlLabel
             value="top"
             control={

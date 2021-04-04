@@ -4,12 +4,19 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-export default function SimpleCard(props) {
+interface Props {
+  color: string;
+  metric: string;
+  data: string;
+}
+
+export default function SimpleCard(props: Props) {
   const useStyles = makeStyles({
     card: {
       maxWidth: 150,
       float: 'left',
       marginLeft: 15,
+      backgroundColor: 'antiquewhite'
     },
     title: {
       fontSize: 14,

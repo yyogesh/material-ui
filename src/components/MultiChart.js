@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useSelector } from 'react-redux';
-import Card from '../components/Card';
+import Card from './Card';
+import { Box, Card as MCard } from '@material-ui/core';
 
 export default function MultiChart() {
   const [dataArr, dataCon] = useState([]);
@@ -78,77 +79,81 @@ export default function MultiChart() {
   console.log('activeMetrics', activeMetrics);
 
   return (
-    <>
-      {activeMetrics.map(i => {
-        if (i.metricName === injValveData[0].metric) {
-          return (
-            <Card
-              color={colors[i.metricName]}
-              metric={names[i.metricName]}
-              data={`${injValveData[injValveData.length - 1].value}${injValveData[0].unit}`}
-            />
-          );
-        } else if (i.metricName === oilTempData[0].metric) {
-          return (
-            <Card
-              color={colors[i.metricName]}
-              metric={names[i.metricName]}
-              data={`${oilTempData[oilTempData.length - 1].value} ${oilTempData[0].unit}`}
-            />
-          );
-        } else if (i.metricName === flareTempData[0].metric) {
-          return (
-            <Card
-              color={colors[i.metricName]}
-              metric={names[i.metricName]}
-              data={`${flareTempData[flareTempData.length - 1].value} ${flareTempData[0].unit}`}
-            />
-          );
-        } else if (i.metricName === waterTempData[0].metric) {
-          return (
-            <Card
-              color={colors[i.metricName]}
-              metric={names[i.metricName]}
-              data={`${waterTempData[waterTempData.length - 1].value} ${waterTempData[0].unit}`}
-            />
-          );
-        } else if (i.metricName === casingPressureData[0].metric) {
-          return (
-            <Card
-              color={colors[i.metricName]}
-              metric={names[i.metricName]}
-              data={`${casingPressureData[casingPressureData.length - 1].value} ${casingPressureData[0].unit}`}
-            />
-          );
-        } else if (i.metricName === tubingPressureData[0].metric) {
-          return (
-            <Card
-              color={colors[i.metricName]}
-              metric={names[i.metricName]}
-              data={`${tubingPressureData[tubingPressureData.length - 1].value} ${tubingPressureData[0].unit}`}
-            />
-          );
-        }
-      })}
-      <LineChart width={1000} height={600}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="at" type="category" allowDuplicatedCategory={false} />
-        <YAxis dataKey="value" />
-        <Tooltip />
-        <Legend layout="vertical" verticalAlign="middle" align="right" />
-        {dataForChart.map(i => {
-          return (
-            <Line
-              dataKey="value"
-              data={i.measurements}
-              name={names[i.metric]}
-              key={i.metric}
-              dot={false}
-              stroke={colors[i.metric]}
-            />
-          );
+    <Box flexDirection="column" display="flex">
+      <Box p={4} display="flex" justifyContent="space-around">
+        {activeMetrics.map(i => {
+          if (injValveData.length > 0 && i.metricName === injValveData[0].metric) {
+            return (
+              <Card
+                color={colors[i.metricName]}
+                metric={names[i.metricName]}
+                data={`${injValveData[injValveData.length - 1].value}${injValveData[0].unit}`}
+              />
+            );
+          } else if (oilTempData.length > 0 && i.metricName === oilTempData[0].metric) {
+            return (
+              <Card
+                color={colors[i.metricName]}
+                metric={names[i.metricName]}
+                data={`${oilTempData[oilTempData.length - 1].value} ${oilTempData[0].unit}`}
+              />
+            );
+          } else if (flareTempData.length > 0 && i.metricName === flareTempData[0].metric) {
+            return (
+              <Card
+                color={colors[i.metricName]}
+                metric={names[i.metricName]}
+                data={`${flareTempData[flareTempData.length - 1].value} ${flareTempData[0].unit}`}
+              />
+            );
+          } else if (waterTempData.length > 0 && i.metricName === waterTempData[0].metric) {
+            return (
+              <Card
+                color={colors[i.metricName]}
+                metric={names[i.metricName]}
+                data={`${waterTempData[waterTempData.length - 1].value} ${waterTempData[0].unit}`}
+              />
+            );
+          } else if (casingPressureData.length > 0 && i.metricName === casingPressureData[0].metric) {
+            return (
+              <Card
+                color={colors[i.metricName]}
+                metric={names[i.metricName]}
+                data={`${casingPressureData[casingPressureData.length - 1].value} ${casingPressureData[0].unit}`}
+              />
+            );
+          } else if (tubingPressureData.length > 0 && i.metricName === tubingPressureData[0].metric) {
+            return (
+              <Card
+                color={colors[i.metricName]}
+                metric={names[i.metricName]}
+                data={`${tubingPressureData[tubingPressureData.length - 1].value} ${tubingPressureData[0].unit}`}
+              />
+            );
+          }
         })}
-      </LineChart>
-    </>
+      </Box>
+      <MCard style={{ backgroundColor: 'aliceblue' }} >
+        <LineChart width={window.innerWidth} height={700}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="at" type="category" allowDuplicatedCategory={false} />
+          <YAxis dataKey="value" />
+          <Tooltip />
+          <Legend layout="vertical" verticalAlign="middle" align="right" />
+          {dataForChart.map(i => {
+            return (
+              <Line
+                dataKey="value"
+                data={i.measurements}
+                name={names[i.metric]}
+                key={i.metric}
+                dot={false}
+                stroke={colors[i.metric]}
+              />
+            );
+          })}
+        </LineChart>
+      </MCard>
+    </Box>
   );
 }

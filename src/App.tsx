@@ -11,6 +11,7 @@ import Switches from './components/Switches';
 import MultiChart from './components/MultiChart';
 import Subscription from './Features/Subscription/subscription';
 import MultipleMetrics from './Features/MultipleMetrics/multipleMetrics';
+import { Card } from '@material-ui/core';
 
 const store = createStore();
 const theme = createMuiTheme({
@@ -35,8 +36,10 @@ const App = () => (
         <MultipleMetrics />
         <Subscription />
         <Header />
-        <Switches />
-        <MultiChart />
+        <Card style={{ height: 'calc(100vh - 66px)' }}>
+          <Switches />
+          <MultiChart />
+        </Card>
         <ToastContainer />
       </Wrapper>
     </Provider>
